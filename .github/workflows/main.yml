@@ -3,47 +3,36 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-# This workflow file requires a free account on Semgrep.dev to
-# manage rules, file ignores, notifications, and more.
-#
-# See https://semgrep.dev/docs
-
-name: Semgrep
+name: tfsec
 
 on:
   push:
     branches: [ $default-branch, $protected-branches ]
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ $default-branch ]
+    branches: [ $default-branch ]  
   schedule:
     - cron: $cron-weekly
 
-permissions:
-  contents: read
-
 jobs:
-  semgrep:
-    permissions:
-      contents: read # for actions/checkout to fetch code
-      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status 
-    name: Scan
+  tfsec:
+    name: Run tfsec sarif report
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
     steps:
-      # Checkout project source
-      - uses: actions/checkout@v3
+      - name: Clone repo
+        uses: actions/checkout@v3
 
-      # Scan code using project's configuration on https://semgrep.dev/manage
-      - uses: returntocorp/semgrep-action@fcd5ab7459e8d91cb1777481980d1b18b4fc6735
+      - name: Run tfsec
+        uses: aquasecurity/tfsec-sarif-action@9a83b5c3524f825c020e356335855741fd02745f
         with:
-          publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
-          publishDeployment: ${{ secrets.SEMGREP_DEPLOYMENT_ID }}
-          generateSarif: "1"
+          sarif_file: tfsec.sarif         
 
-      # Upload SARIF file generated in previous step
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: semgrep.sarif
-        if: always()
+          # Path to SARIF file relative to the root of the repository
+          sarif_file: tfsec.sarif  
