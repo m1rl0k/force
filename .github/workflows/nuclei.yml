@@ -2,7 +2,7 @@
     runs-on: ubuntu-latest
     name: Scan live web app for security flaws
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Start containers
         run: docker-compose -f "docker-compose.yml" up -d --build
