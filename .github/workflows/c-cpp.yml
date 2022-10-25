@@ -1,23 +1,15 @@
-name: C/C++ CI
-
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+on: [pull_request, push]
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
 
+    env:
+      COVERAGE_DATA_PATH: extras/coverage-data/coverage.info
+
     steps:
-    - uses: actions/checkout@v3
-    - name: configure
-      run: ./
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+      - uses: actions/checkout@v2
+
+      - uses: arduino/cpp-test-action@v1
+        
+        with:
+          coverage-data-path: ${{ env.COVERAGE_DATA_PATH }}
