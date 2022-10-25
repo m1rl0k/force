@@ -1,6 +1,3 @@
-- name: Terrascan IaC scanner
-  uses: tenable/terrascan-action@v1.4.1
-
 on: [push]
 
 jobs:
@@ -18,14 +15,15 @@ jobs:
         iac_version: 'v14'
         policy_type: 'aws'
         only_warn: true
-        #scm_token: ${{ secrets.ACCESS_TOKEN }}
-        #verbose: true
-        #sarif_upload: true
+        sarif_upload: true
         #non_recursive:
         #iac_dir:
         #policy_path:
         #skip_rules:
         #config_path:
-        #find_vulnerabilities:
         #webhook_url:
         #webhook_token:
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: terrascan.sarif
