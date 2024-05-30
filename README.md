@@ -1,19 +1,12 @@
-# force
+These files are based on my research on force measurement in newtons using Arduino and Piezo Electric fabric known as Eeonyx. The project involved hand-crafting materials with silver threads as wires, connecting both analog and digital sensors to the Arduino. Using smoothing, buffering, and a Butterworth low-pass filter written in C++, I processed the sensor data. Additionally, a Processing sketch was used to simulate the interaction in a real-time 3D representation, bridging the physical and software models. The Arduino sketches were updated over-the-air (OTA) using Bluetooth 4.1, provided by Texas Instruments. All sensors were connected to either "A1" for analog or "D1" for digital pins.
 
+The force voltage was calibrated to match the actual battery, and the resistance was dynamically calculated to provide accurate newton readings on the fabric. This adjustment accounted for changes in resistance as the material moved.
 
-These files are based on my research with Force, in newtons using Arduino, - and Piezo Electric fabric known as Eeyonex.
-The project was hand-crafted material using silver threads as wires to the arduino both analog and digital sensors, using smoothing buffering and a butterworth low-pass filter written in C++, as well as processing sketch to simulate the interaction in real time 3D representation along the physical and software models. 
-The arduino was updated with sketches OTA - Over the AIR using BLUETOOTH 4.1 stack. (Provided by Texas Instruments) - 
-All sensors crafted were connected to "A1" or "D1" for analog or digital pins.
+When the force in newtons reached certain thresholds, the system counted them as individual hits (physical impacts on the material). These were indicated by red, yellow, or green LEDs, depending on the force magnitude. Additionally, a piezo-buzzer emitted a sound, and the numerical force values were transmitted via Bluetooth to both the 3D models in Processing and an iOS app written in Swift. The device handled all these functions seamlessly within the same loop.
 
-The force voltage was modified to match that of the actual battery, and resistance was calculated to be a dynamic variable to give accurate newton readings on fabric, while the resistance changed, as the material moved through space.
+A 9DOF accelerometer, magnetometer, and gyroscope were used to embed absolute orientation scientifically, matching real-world positioning in motion. The serial output was mapped to a 3D Processing sketch, providing a visual display.
 
-As newtons reached a certain threshhold, they were either counted as individual hits (physical hits to the material), indicated by either a red, yellow or green light depending on the amount of FORCE, Given a sound tone emitted through a piezo-buzzer, and /or transmitted in numerical value the actual amount of FORCE via bluetooth to both 3D models in processing, and eventually to an iOS app written in swift. Simultaineously the device was able to handle all of these functions within the same loop, seamlessly.
-
-
-A 9DOF accelerometor, magnetormeter, and gyroscope were used to embed actual absolute orientation on a scientific level in all studies. This matched real world orientation and positioning in motion, while the serial output was mapped to a 3d processing sketch ran along side the device to give display.
-
-This concludes the research of 5+ years with the ATmega32 processor, several conductive fabrics and materials, the iteration of the butterworth low-pass filter at the beginning of the C++ Loop, various smoothing techniques and buffering of real time data, passed via Bluetooth, and marks as a success that all theories presented and questioned by the author were met.
+This research, spanning over five years with the ATmega32 processor and various conductive fabrics, successfully demonstrated the use of a Butterworth low-pass filter at the beginning of the C++ loop, along with various smoothing and buffering techniques for real-time data transmission via Bluetooth. All theoretical questions posed by the author were met, marking the research as a success.
 
 
 # Force Measurement and Hit Detection System
