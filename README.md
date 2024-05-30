@@ -205,7 +205,7 @@ bool detectHit(float force) {
   return false;
 }
 ```
-###Butterworth Filter Importance
+### Butterworth Filter Importance
 The Butterworth filter is a type of signal processing filter designed to have a flat frequency response in the passband. It is particularly useful in this application for smoothing out the sensor readings and removing high-frequency noise, ensuring that the measurements are accurate and reliable.
 
 Introduction in Loop
